@@ -5,5 +5,5 @@
   "Description": "It rains in winter",
   "UniqueID": "idermailer.WinterRain",
   "EntryDll": "WinterRain.dll",
-  "UpdateKeys": []
+  "UpdateKeys": [ "Nexus:13767" ]
 }
