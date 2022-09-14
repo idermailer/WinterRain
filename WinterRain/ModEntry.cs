@@ -29,37 +29,37 @@ namespace WinterRain
         {
             randomDouble = Game1.random.NextDouble();
 
-            if (config.useSnowDuration)
+            // fall 28 + winter
+            if (Game1.currentSeason == "winter")
             {
-                // fall 28 + winter
-                if (Game1.currentSeason == "winter")
+                if ((int)snowDuration.GetValue(0) > (Game1.dayOfMonth + 1) || (Game1.dayOfMonth + 1) > (int)snowDuration.GetValue(1))
                 {
-                    if ((int)snowDuration.GetValue(0) > (Game1.dayOfMonth + 1) || (Game1.dayOfMonth + 1) > (int)snowDuration.GetValue(1))
-                    {
-                        isSnowDuration = false;
-                    }
-                    else
-                    {
-                        isSnowDuration = true;
-                    }
-                }
-                else if (Game1.currentSeason == "fall" && Game1.dayOfMonth == 28)
-                {
-                    if ((int)snowDuration.GetValue(0) != 1) // in fall 28, if tomorrow is not snowDuration
-                    {
-                        isSnowDuration = false;
-                    }
-                    else
-                    {
-                        isSnowDuration = true;
-                    }
+                    isSnowDuration = false;
                 }
                 else
                 {
-                    isSnowDuration=false;
-                    return;
+                    isSnowDuration = true;
                 }
+            }
+            else if (Game1.currentSeason == "fall" && Game1.dayOfMonth == 28)
+            {
+                if ((int)snowDuration.GetValue(0) != 1) // in fall 28, if tomorrow is not snowDuration
+                {
+                    isSnowDuration = false;
+                }
+                else
+                {
+                    isSnowDuration = true;
+                }
+            }
+            else
+            {
+                isSnowDuration = false;
+                return;
+            }
 
+            if (config.useSnowDuration)
+            {
                 // weather re-set, because 63% the default value is too high.
                 if (isSnowDuration)
                 {
